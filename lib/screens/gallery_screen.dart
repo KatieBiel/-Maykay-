@@ -4,11 +4,9 @@ import 'package:photo_view/photo_view_gallery.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../widgets/app_scaffold.dart';
 
-/// 🖼️ Galeria zdjęć — miniatury + podgląd w trybie pełnoekranowym
 class GalleryPage extends StatelessWidget {
   const GalleryPage({super.key});
 
-  /// Lista ścieżek do obrazów w folderze assets/images
   final List<String> imagePaths = const [
     'assets/images/gallery/gal1.webp',
     'assets/images/gallery/gal2.webp',
@@ -43,12 +41,11 @@ class GalleryPage extends StatelessWidget {
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
           ),
-          itemBuilder:
-              (context, index) => _GalleryTile(
-                imagePath: imagePaths[index],
-                allImages: imagePaths,
-                index: index,
-              ),
+          itemBuilder: (context, index) => _GalleryTile(
+            imagePath: imagePaths[index],
+            allImages: imagePaths,
+            index: index,
+          ),
         ),
       ),
     );
@@ -69,17 +66,13 @@ class _GalleryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:
-          () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder:
-                  (_) => PhotoViewScreen(
-                    imagePaths: allImages,
-                    initialIndex: index,
-                  ),
-            ),
-          ),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) =>
+              PhotoViewScreen(imagePaths: allImages, initialIndex: index),
+        ),
+      ),
       child: Semantics(
         container: false,
         excludeSemantics: true,
@@ -92,7 +85,6 @@ class _GalleryTile extends StatelessWidget {
   }
 }
 
-/// 🔹 Pełnoekranowy podgląd zdjęć
 class PhotoViewScreen extends StatelessWidget {
   final List<String> imagePaths;
   final int initialIndex;
@@ -118,17 +110,14 @@ class PhotoViewScreen extends StatelessWidget {
             backgroundDecoration: const BoxDecoration(
               color: Colors.transparent,
             ),
-            builder:
-                (context, index) => PhotoViewGalleryPageOptions(
-                  imageProvider: AssetImage(imagePaths[index]),
-                  heroAttributes: PhotoViewHeroAttributes(
-                    tag: imagePaths[index],
-                  ),
-                  minScale: PhotoViewComputedScale.contained,
-                  maxScale: PhotoViewComputedScale.contained * 3,
-                  basePosition: Alignment.center,
-                  tightMode: true,
-                ),
+            builder: (context, index) => PhotoViewGalleryPageOptions(
+              imageProvider: AssetImage(imagePaths[index]),
+              heroAttributes: PhotoViewHeroAttributes(tag: imagePaths[index]),
+              minScale: PhotoViewComputedScale.contained,
+              maxScale: PhotoViewComputedScale.contained * 3,
+              basePosition: Alignment.center,
+              tightMode: true,
+            ),
           ),
 
           Positioned(

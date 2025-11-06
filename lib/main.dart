@@ -14,7 +14,6 @@ import 'firebase_options.dart';
 import 'logger.dart';
 import 'push_service.dart';
 
-// Screens
 import 'screens/splash_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'menu.dart';
@@ -42,7 +41,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ✅ NOWOŚĆ 2025: edge-to-edge, bez deprecated overlayStyle
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
   try {
@@ -90,7 +88,7 @@ class MaykayApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           elevation: 4,
           centerTitle: false,
-          backgroundColor: Colors.transparent, // pozwala na edge-to-edge
+          backgroundColor: Colors.transparent,
           surfaceTintColor: Colors.white,
           toolbarHeight: 56,
           iconTheme: const IconThemeData(color: Colors.black),

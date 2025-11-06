@@ -21,7 +21,6 @@ class _ContactPageState extends State<ContactScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // precacheImage wywołujemy tylko raz
     if (!_imagePrecached) {
       precacheImage(
         const AssetImage('assets/images/besia_welcome.webp'),
@@ -39,33 +38,30 @@ class _ContactPageState extends State<ContactScreen> {
       ContactItem(
         icon: FontAwesomeIcons.whatsapp,
         label: 'WhatsApp',
-        action:
-            () => _launchUrl(
-              context,
-              _whatsappUrl,
-              errorMessage: 'contact.whatsapp_error'.tr(),
-              external: true,
-            ),
+        action: () => _launchUrl(
+          context,
+          _whatsappUrl,
+          errorMessage: 'contact.whatsapp_error'.tr(),
+          external: true,
+        ),
       ),
       ContactItem(
         icon: FontAwesomeIcons.phone,
         label: 'contact.phone'.tr(),
-        action:
-            () => _launchUrl(
-              context,
-              _telUrl,
-              errorMessage: 'contact.phone_error'.tr(),
-            ),
+        action: () => _launchUrl(
+          context,
+          _telUrl,
+          errorMessage: 'contact.phone_error'.tr(),
+        ),
       ),
       ContactItem(
         icon: FontAwesomeIcons.envelope,
         label: 'contact.email'.tr(),
-        action:
-            () => _launchUrl(
-              context,
-              _emailUrl,
-              errorMessage: 'contact.email_error'.tr(),
-            ),
+        action: () => _launchUrl(
+          context,
+          _emailUrl,
+          errorMessage: 'contact.email_error'.tr(),
+        ),
       ),
       ContactItem(
         icon: FontAwesomeIcons.calendarCheck,
@@ -88,7 +84,6 @@ class _ContactPageState extends State<ContactScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Obrazek z fade-in
             Image.asset(
               'assets/images/besia_welcome.webp',
               fit: BoxFit.cover,
@@ -97,14 +92,13 @@ class _ContactPageState extends State<ContactScreen> {
                 if (wasSynchronouslyLoaded) return child;
                 return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 400),
-                  child:
-                      frame == null
-                          ? Container(
-                            key: const ValueKey('placeholder'),
-                            width: double.infinity,
-                            color: Colors.grey[200],
-                          )
-                          : child,
+                  child: frame == null
+                      ? Container(
+                          key: const ValueKey('placeholder'),
+                          width: double.infinity,
+                          color: Colors.grey[200],
+                        )
+                      : child,
                 );
               },
             ),
@@ -116,10 +110,9 @@ class _ContactPageState extends State<ContactScreen> {
                 crossAxisCount: 2,
                 childAspectRatio: 1.3,
                 physics: const NeverScrollableScrollPhysics(),
-                children:
-                    items
-                        .map((item) => ContactActionButton(item: item))
-                        .toList(),
+                children: items
+                    .map((item) => ContactActionButton(item: item))
+                    .toList(),
               ),
             ),
           ],
@@ -138,10 +131,9 @@ class _ContactPageState extends State<ContactScreen> {
     if (await canLaunchUrl(uri)) {
       await launchUrl(
         uri,
-        mode:
-            external
-                ? LaunchMode.externalApplication
-                : LaunchMode.platformDefault,
+        mode: external
+            ? LaunchMode.externalApplication
+            : LaunchMode.platformDefault,
       );
     } else {
       if (!context.mounted) return;
